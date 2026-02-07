@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'apps.users',
     'apps.invitations',
     'apps.projects',
-    'apps.workspaces',
+    'apps.workspaces.apps.WorkspacesConfig',
     'apps.tasks',
 
     'django.contrib.admin',
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
 ]
 
 MIDDLEWARE = [
@@ -144,5 +145,8 @@ CORS_ALLOWED_HEADERS = list(default_headers) + [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    "DEFAULT_PERMISSION_CLASSES": (
+        'rest_framework.permissions.IsAuthenticated',
     ),
 }

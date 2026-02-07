@@ -1,6 +1,5 @@
 from pathlib import Path
 from datetime import timedelta
-from rest_framework_simplejwt.authentication import JWTAuthentication
 import os
 from dotenv import load_dotenv
 
@@ -121,6 +120,8 @@ USE_I18N = True
 
 USE_TZ = True
 
+AUTH_USER_MODEL = 'users.User'
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
@@ -139,3 +140,9 @@ CORS_ALLOWED_CREDENTIALS = True
 CORS_ALLOWED_HEADERS = list(default_headers) + [
     'Authorization',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}

@@ -31,7 +31,7 @@ class Team(models.Model):
         null=True,
         blank=True,
         limit_choices_to={'role': WorkspaceMember.Role.TEAM_LEADER},
-        related_name="led_teams"
+        related_name="lead_teams"
     )
 
     members = models.ManyToManyField(

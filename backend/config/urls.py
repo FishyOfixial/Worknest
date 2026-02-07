@@ -15,8 +15,9 @@ urlpatterns = [
     # Users
     path('api/', include('apps.users.urls')),
     
-    # Workspaces
+    # Workspaces & Projects
     path('api/', include('apps.workspaces.urls')),
+    path('api/', include('apps.projects.urls')),
 
     # Invitations
     path('api/', include('apps.invitations.urls')),

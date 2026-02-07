@@ -8,6 +8,8 @@ from core.permissions import IsTeamLeader
 from .models import Invitation
 from .serializers import InvitationCreateSerializer, AcceptInvitationSerializer
 from django.contrib.auth import get_user_model
+from django.core.mail import send_mail
+from django.conf import settings
 
 User = get_user_model()
 
@@ -29,13 +31,23 @@ class SendInvitationView(APIView):
             invited_by=request.user
         )
 
-        return Response(
-            {
-                "message": "Invitation created",
-                "token": str(invitation.token)
-            },
-            status=status.HTTP_201_CREATED
+        invite_link = f"http://127.0.0.1:3000/invite/{invitation.token}"
+
+        if invitation.role == 'client':
+            subject = f"You are invited to join {workspace.name} as a Client"
+            message = f"Hello!\n\nYou have been invited to join {workspace.name} as a Client.\nClick the link to accept: {invite_link}"
+        else:
+            subject = f"You are invited to join {workspace.name} as a Collaborator"
+            message = f"Hello!\n\nYou have been invited to join {workspace.name} as a Collaborator.\nClick the link to accept: {invite_link}"
+
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[invitation.email],
         )
+
+        return Response( {"message": "Invitation created",}, status=status.HTTP_201_CREATED )
 
 
 class AcceptInvitationView(APIView):

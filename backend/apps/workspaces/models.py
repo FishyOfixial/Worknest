@@ -25,7 +25,7 @@ class WorkspaceMember(models.Model):
     
     class Role(models.TextChoices):
         TEAM_LEADER = 'team_leader', 'Team Leader'
-        COLABORATOR = 'colaborator', 'Colaborator'
+        COLABORATOR = 'collaborator', 'Collaborator'
         CLIENT = 'client', 'Client'
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

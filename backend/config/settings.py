@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'apps.projects',
     'apps.workspaces.apps.WorkspacesConfig',
     'apps.tasks',
+    'apps.comments',
 
     'django.contrib.admin',
     'django.contrib.auth',

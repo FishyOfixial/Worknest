@@ -20,7 +20,7 @@ class TaskSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
         ]
-        read_only_fields = ["id", "created_at", "updated_at", "project"]
+        read_only_fields = ["id", "created_at", "updated_at", "project", "status"]
 
 class TaskAssignmentSerializer(serializers.ModelSerializer):
     user_id = serializers.UUIDField(write_only=True)
@@ -41,3 +41,8 @@ class TaskAssignmentSerializer(serializers.ModelSerializer):
         )
 
         return assignment
+
+class ChangeTaskStatusSerializer(serializers.Serializer):
+    status = serializers.ChoiceField(
+        choices=["TODO", "IN_PROGRESS", "DONE"]
+    )

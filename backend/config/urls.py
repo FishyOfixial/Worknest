@@ -15,10 +15,13 @@ urlpatterns = [
     # Users
     path('api/', include('apps.users.urls')),
     
-    # Workspaces & Projects & Tasks
+    # Workspaces & Projects
     path('api/', include('apps.workspaces.urls')),
     path('api/', include('apps.projects.urls')),
+
+    # Tasks & Comments
     path("api/", include("apps.tasks.urls")),
+    path("api/", include('apps.comments.urls')),
 
     # Invitations
     path('api/', include('apps.invitations.urls')),
